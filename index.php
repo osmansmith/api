@@ -34,8 +34,7 @@ if(isset($url[2])){ if($url[2] != ''){$params = $url[2];}}
               }                            
           }else{
               echo 'Error1';
-               var_dump($controller);
-               var_dump($method);
+              
           }
       }else{            
         $controller->index();        
@@ -44,8 +43,7 @@ if(isset($url[2])){ if($url[2] != ''){$params = $url[2];}}
 else
   {
       echo 'Error2';
-    var_dump($controller);
-     var_dump($method);
+   
   };
  
 
