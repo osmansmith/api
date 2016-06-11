@@ -31,7 +31,7 @@ $code = $_POST['code'];
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="<?php echo URL;?>index/index">Licitaciones <span class="sr-only">(current)</span></a></li>
         <li><a href="#">Link</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -77,6 +77,10 @@ $code = $_POST['code'];
        <div class="col-sm-6" id="general"></div>       
        <div class="col-sm-6" id="comprador"></div>
      </div>
+     <div class="row">
+       <div class="col-sm-6" id="adicional"></div>
+       <div class="col-sm-6"></div>
+     </div>
    </div>
  </section>        
 <script src="<?php echo URL; ?>public/js/jquery.js"></script>  
@@ -86,50 +90,39 @@ $code = $_POST['code'];
   var uri = "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json?codigo="+licita+"&ticket=7F258E67-8449-45AF-8F88-674FED6FE26A";
 var cam = Array;
 $.getJSON(uri)
-  .done(function( data ) {
-        console.log(data.Cantidad); 
-        console.log(data.FechaCreacion); 
-        console.log(data.Version);          
+  .done(function( data ) {                 
  $.each(data.Listado, function(i, campo){
-   $("#general").html("<div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title'>"
-                    +campo.Nombre+ "</h3></div><div class='panel-body'>Codigo Externo :"
+   $("#general").html("<div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title'>Licitación</h3></div><div                    class='panel-body'>Nombre de Licitacion :"
+                    +campo.Nombre+ "<br /> Codigo Externo :"
                     +campo.CodigoExterno+ "<br /> Fecha Cierre : "
                     +campo.FechaCierre+ "<br /> Codigo Estado :"
                     +campo.CodigoEstado+ "<br /> Descripcion :"
                     +campo.Descripcion+ "<br /> Estado :"
                     +campo.Estado);  
-               console.log(campo.Comprador);
-                /*for (var x = 0 ; x < campo.Comprador.length ; x++) {
-                   $("#comprador").html("<div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title'>"
-                          +cam[x].NombreOrganismo+ "</h3></div><div class='panel-body'>Codigo Organismo :"
-                          +cam[x].CodigoOrganismo+ "<br /> Rut Unidad : "
-                          +cam[x].RutUnidad+ "<br /> Codigo Unidad :"
-                          +cam[x].CodigoUnidad+ "<br /> Nombre Unidad :"
-                          +cam[x].NombreUnidad+ "<br /> Direccion Unidad :"
-                          +cam[x].DireccionUnidad+ "<br />Comuna Unidad : "
-                          +cam[x].ComunaUnidad+ "<br /> Region Unidad : "
-                          +cam[x].RegionUnidad+ "<br /> Rut Usuario : "
-                          +cam[x].RutUsuario+ "<br /> Codigo Usuario : "
-                          +cam[x].CodigoUsuario+ "<br /> Nombre Usuario : "
-                          +cam[x].NombreUsuario+ "<br /> Cargo Usuario : "
-                          +cam[x].CargoUsuario); 
-                }*/
+                   /* console.log(campo.Comprador.CodigoOrganismo); */                                                     
+   $("#comprador").html("<div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title'>Datos del Comprador</h3></div><div class='panel-body'>Nombre del Organismo Comprador : "
+      +campo.Comprador.NombreOrganismo+ "<br />Codigo Organismo :"
+      +campo.Comprador.CodigoOrganismo+ "<br /> Rut Unidad : "
+      +campo.Comprador.RutUnidad+ "<br /> Codigo Unidad :"
+      +campo.Comprador.CodigoUnidad+ "<br /> Nombre Unidad :"
+      +campo.Comprador.NombreUnidad+ "<br /> Direccion Unidad :"
+      +campo.Comprador.DireccionUnidad+ "<br />Comuna Unidad : "
+      +campo.Comprador.ComunaUnidad+ "<br /> Region Unidad : "
+      +campo.Comprador.RegionUnidad+ "<br /> Rut Usuario : "
+      +campo.Comprador.RutUsuario+ "<br /> Codigo Usuario : "
+      +campo.Comprador.CodigoUsuario+ "<br /> Nombre Usuario : "
+      +campo.Comprador.NombreUsuario+ "<br /> Cargo Usuario : "
+      +campo.Comprador.CargoUsuario); 
+      $("#general").html("<div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title'>Licitación</h3></div><div                    class='panel-body'>Nombre de Licitacion :"
+                    +campo.Nombre+ "<br /> Codigo Externo :"
+                    +campo.CodigoExterno+ "<br /> Fecha Cierre : "
+                    +campo.FechaCierre+ "<br /> Codigo Estado :"
+                    +campo.CodigoEstado+ "<br /> Descripcion :"
+                    +campo.Descripcion+ "<br /> Estado :"
+                    +campo.Estado); 
+                          
         });
- /* $.each(du, function(d, cam){
-         $("#comprador").html("<div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title'>"
-                          +cam.NombreOrganismo+ "</h3></div><div class='panel-body'>Codigo Organismo :"
-                          +cam.CodigoOrganismo+ "<br /> Rut Unidad : "
-                          +cam.RutUnidad+ "<br /> Codigo Unidad :"
-                          +cam.CodigoUnidad+ "<br /> Nombre Unidad :"
-                          +cam.NombreUnidad+ "<br /> Direccion Unidad :"
-                          +cam.DireccionUnidad+ "<br />Comuna Unidad : "
-                          +cam.ComunaUnidad+ "<br /> Region Unidad : "
-                          +cam.RegionUnidad+ "<br /> Rut Usuario : "
-                          +cam.RutUsuario+ "<br /> Codigo Usuario : "
-                          +cam.CodigoUsuario+ "<br /> Nombre Usuario : "
-                          +cam.NombreUsuario+ "<br /> Cargo Usuario : "
-                          +cam.CargoUsuario); 
-         });*/
+  
       });
        
     

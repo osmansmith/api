@@ -18,29 +18,19 @@
           $this->view->render('inicio');
    
       }
-      function encargadoempaque()
-      {
-           # el metodo render admite un parametro que es la pagina de la carpeta views sin el .php
-          $this->view->render('user/encargado');
-      }
-      function piocha()
-      {         
-          $this->view->render('body/empaque/head');
-          $this->view->render('user/piocha');
-          $this->view->render('body/empaque/footer');
-      }           
-      function empaque()
-     {   
-         $this->view->render('body/empaque/head');
-         $this->view->render('user/empaque'); 
-         $this->view->render('body/empaque/footer');
-      } 
-      
-      
-      function data()
-      {
-          header("location:".URL."sse/sse.php");
-      }
+      public function licitacion()
+      {    
+          # Array Asociativo
+          $datos = [   
+              'nombre' => $_POST['nombre'],
+              'externo' => $_POST['externo'],
+              'cierre' => $_POST['cierre'],
+              'estado' => $_POST['estado']
+              
+          ];                                             
+              $this->model->registrar($datos);                                      
+      }    
+     
       
       
   }

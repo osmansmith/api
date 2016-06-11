@@ -10,20 +10,18 @@
               }       
        function registrar($dato)
        {    
-        $imagen = $dato['imagen'];   
-        $nombre = $dato['nombre'];
-        $apaterno = $dato['apaterno'];
-        $amaterno = $dato['amaterno'];
-        $fono = $dato['fono'];
-        $direccion = $dato['direccion'];
-        $email = $dato['email'];
-        $pass = $dato['pass'];
-        $tipo = $dato['tipo'];  
-        $estado = $dato['estado'];  
+        $nombre = $dato['nombre'];   
+        $cierre = $dato['cierre'];
+        $externo = $dato['externo'];
+        $estado = $dato['estado'];
+        
+  $this->db->ejecutar("SELECT * FROM licitacion WHERE nombre_lic = '".$nombre."' AND externo_lic = '".$externo."' AND cierre_lic = '".$cierre."' AND estado_lic = '".$estado."'");
+         if($this->db){
            
-        $this->db->ejecutar("INSERT INTO users(CORREO_USER,PASS_USER,NOM_USER,AP_USER,AM_USER,DIR_USER,ESTADO_USER,IMG_USER,CEL_USER)
-        VALUES('".$email."','".$pass."','".$nombre."','".$apaterno."','".$amaterno."','".$direccion."',".$estado.",'".$imagen."',".$fono.")");           
-         $this->usuario($tipo);                               
+         }else{
+        $this->db->ejecutar("INSERT INTO licitacion(nombre_lic,externo_lic,cierre_lic,estado_lic) VALUES('".$nombre."','".$externo."','".$cierre."',".$estado_lic.")");           
+                                      
+         }
        }       
        function usuario($tipo)
        {             
