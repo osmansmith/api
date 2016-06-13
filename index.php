@@ -28,24 +28,14 @@ if(isset($url[2])){ if($url[2] != ''){$params = $url[2];}}
           {
               if(isset($params))
               {
-                  $controller->{$method}($params);
+              $controller->{$method}($params);
               }else{
               $controller->{$method}();                    
               }                            
-          }else{
-              echo 'Error1';
-              
-          }
-      }else{            
-        $controller->index();        
-      }
-  }
-else
-  {
-      echo 'Error2';
-   
-  };
- 
-
+          }else{ echo 'Error1'; 
+               }
+      }else{ $controller->index(); 
+           }
+  }else{ echo 'Error2'; 
+       }
      
-?>

@@ -61,8 +61,21 @@
    <div class="container">
       <div class="jumbotron">
         <h3>API</h3> 
-        <button id="mostrar" class="btn btn-primary btn-lg">Mostrar</button>
-        <button id="enviar" class="btn btn-warning btn-lg">enviar</button>   
+          <h4>ELige la lista que quieres ver</h4>    
+          <div class="row">
+              <div class="col-sm-2"><button class="btn btn-success btn-lg " id="Publicada">Publicada</button></div>
+              <div class="col-sm-2"><button class="btn btn-success btn-lg " id="Cerrada">Cerrada</button></div>
+              <div class="col-sm-2"><button class="btn btn-success btn-lg " id="Desierta">Desierta</button></div>
+              <div class="col-sm-2"><button class="btn btn-success btn-lg " id="Adjudicada">Adjudicada</button></div>
+              <div class="col-sm-2"><button class="btn btn-success btn-lg " id="Revocada">Revocada</button></div>
+              <div class="col-sm-2"><button class="btn btn-success btn-lg " id="Suspendida">Suspendida</button></div>
+          </div>
+          <br />
+       <div class="row">
+           <div class="col-sm-4">
+               <button class="btn btn-success btn-lg" id="Todos">Todos</button>
+           </div>
+       </div>
       </div> 
    </div>
  </section>   
@@ -70,7 +83,7 @@
    <div class="container">
     
      <div class="row">      
-       <div class="col-sm-6" id="ocho">
+       <div class="col-sm-12" id="ocho">
        <!-- <div class="gifLoad">
           <img src="<?php echo URL;?>public/img/loading.gif">
         </div>-->
@@ -89,86 +102,159 @@
   var cierre = new Array();
   var estado = new Array();
   var cont = 0;
-  var uri = "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json?estado=activas&ticket=7F258E67-8449-45AF-8F88-674FED6FE26A"; 
-$("#mostrar").click(function(){    
+  /*var uri = "<?php echo JSON;?>estado=activas&ticket=<?php echo TIC;?>"; */
+$("#Todos").click(function(){   
+    if($("#ocho").length){ $("#ocho").html(" "); }  
+    var uri = "<?php echo JSON;?>estado=Todos&ticket=<?php echo TIC;?>";
+    $.getJSON(uri).done(function( data ) {  
+        console.log(data);
+     $.each(data.Listado, function(i, campo){    
+       $("#ocho").append("<form method='POST' action='<?php echo URL;?>index/inicio'><div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title text-lowercase'><div  class='text-capitalize'>"
+                        +campo.Nombre+ "</div></h3></div><div class='panel-body'>Codigo Externo :<input type='text' value='"
+                        +campo.CodigoExterno+ "' name='code'/><br /> Fecha Cierre : "
+                        +campo.FechaCierre+ "<br /> Codigo Estado :"
+                        +campo.CodigoEstado+ "<br /> <button class='btn btn-info btn-sm'>Detalle</button></div></div></form>");                                  
+            });
+          });             
+});
+$("#Cerrada").click(function(){   
+    if($("#ocho").length){ $("#ocho").html(" "); }  
+    var uri = "<?php echo JSON;?>estado=Cerrada&ticket=<?php echo TIC;?>";
+    $.getJSON(uri).done(function( data ) {  
+        console.log(data);
+     $.each(data.Listado, function(i, campo){    
+       $("#ocho").append("<form method='POST' action='<?php echo URL;?>index/inicio'><div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title text-lowercase'><div  class='text-capitalize'>"
+                        +campo.Nombre+ "</div></h3></div><div class='panel-body'>Codigo Externo :<input type='text' value='"
+                        +campo.CodigoExterno+ "' name='code'/><br /> Fecha Cierre : "
+                        +campo.FechaCierre+ "<br /> Codigo Estado :"
+                        +campo.CodigoEstado+ "<br /> <button class='btn btn-info btn-sm'>Detalle</button></div></div></form>");                                  
+            });
+          });             
+});
+$("#Desierta").click(function(){   
+if($("#ocho").length){ $("#ocho").html(" "); }  
+var uri = "<?php echo JSON;?>estado=Desierta&ticket=<?php echo TIC;?>";
 $.getJSON(uri).done(function( data ) {  
- 
+    console.log(data);
  $.each(data.Listado, function(i, campo){    
    $("#ocho").append("<form method='POST' action='<?php echo URL;?>index/inicio'><div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title text-lowercase'><div  class='text-capitalize'>"
                     +campo.Nombre+ "</div></h3></div><div class='panel-body'>Codigo Externo :<input type='text' value='"
                     +campo.CodigoExterno+ "' name='code'/><br /> Fecha Cierre : "
                     +campo.FechaCierre+ "<br /> Codigo Estado :"
-                    +campo.CodigoEstado+ "<br /> <button class='btn btn-info btn-sm'>Detalle</button></div></div></form>");          
-                     nombre[i] = campo.Nombre;
-                    externo[i] = campo.CodigoExterno;
-                     cierre[i] = campo.FechaCierre;
-                     estado[i] = campo.CodigoEstado;            
-                                   
-               datos = {
-                'nombre' : nombre[i],
-                'externo' : externo[i],
-                'cierre' : cierre[i],
-                'estado' : estado[i]
-              };
-           
-    
-                                     
+                    +campo.CodigoEstado+ "<br /> <button class='btn btn-info btn-sm'>Detalle</button></div></div></form>");                                  
         });
-      }); 
-   
-    /*$.ajax({
-      type: 'GET',
-       url : 'http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json?estado=activas&ticket=7F258E67-8449-45AF-8F88-674FED6FE26A',
-      dataType: 'json',     
-      success: function(data){
-     
-          $.each(data.Listado, function(i, campo){    
-          $("#ocho").append("<form method='POST' action='<?php echo URL;?>index/inicio'><div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title text-lowercase'><div  class='text-capitalize'>"
+      });             
+});
+$("#Adjudicada").click(function(){   
+if($("#ocho").length){ $("#ocho").html(" "); }  
+var uri = "<?php echo JSON;?>estado=Adjudicada&ticket=<?php echo TIC;?>";
+$.getJSON(uri).done(function( data ) {  
+    console.log(data);
+ $.each(data.Listado, function(i, campo){    
+   $("#ocho").append("<form method='POST' action='<?php echo URL;?>index/inicio'><div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title text-lowercase'><div  class='text-capitalize'>"
                     +campo.Nombre+ "</div></h3></div><div class='panel-body'>Codigo Externo :<input type='text' value='"
                     +campo.CodigoExterno+ "' name='code'/><br /> Fecha Cierre : "
                     +campo.FechaCierre+ "<br /> Codigo Estado :"
-                    +campo.CodigoEstado+ "<br /> <button class='btn btn-info btn-sm'>Detalle</button></div></div></form>");        
-                    nombre[i] = campo.Nombre;
-                    externo[i] = campo.CodigoExterno;
-                     cierre[i] = campo.FechaCierre;
-                     estado[i] = campo.CodigoEstado;
-            console.log(typeof nombre[i]+"<br />"+
-                        typeof externo[i]+"<br />"+
-                        typeof cierre[i]+"<br />"+
-                        typeof estado[i]+"<br />"
-                       )
-              
-         
-            
-            cont += 1;
-               datos = {
-                'nombre' : nombre[i],
-                'externo' : externo[i],
-                'cierre' : cierre[i],
-                'estado' : estado[i]
-              };
-            console.log(datos);
+                    +campo.CodigoEstado+ "<br /> <button class='btn btn-info btn-sm'>Detalle</button></div></div></form>");                                  
         });
-         
-      
-    }
-  });
-   */
-        $("#mostrar").hide();
-        $("#enviar").show();
-    });
-  $("#enviar").click(function(){
-    var otro = {};
-   for(var i = 0 ; i < datos.cierre.length ; i++){
-    otro = {
-                'nombre' : nombre[i],
-                'externo' : externo[i],
-                'cierre' : cierre[i],
-                'estado' : estado[i]
-              };
-  $.post('<?php echo URL;?>index/licitacion',otro);
-   }
-    });
+      });             
+});
+$("#Revocada").click(function(){   
+if($("#ocho").length){ $("#ocho").html(" "); }  
+var uri = "<?php echo JSON;?>estado=Revocada&ticket=<?php echo TIC;?>";
+$.getJSON(uri).done(function( data ) {  
+    console.log(data);
+ $.each(data.Listado, function(i, campo){    
+   $("#ocho").append("<form method='POST' action='<?php echo URL;?>index/inicio'><div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title text-lowercase'><div  class='text-capitalize'>"
+                    +campo.Nombre+ "</div></h3></div><div class='panel-body'>Codigo Externo :<input type='text' value='"
+                    +campo.CodigoExterno+ "' name='code'/><br /> Fecha Cierre : "
+                    +campo.FechaCierre+ "<br /> Codigo Estado :"
+                    +campo.CodigoEstado+ "<br /> <button class='btn btn-info btn-sm'>Detalle</button></div></div></form>");                                  
+        });
+      });             
+});
+$("#Suspendida").click(function(){   
+if($("#ocho").length){ $("#ocho").html(" "); }  
+var uri = "<?php echo JSON;?>estado=Suspendida&ticket=<?php echo TIC;?>";
+$.getJSON(uri).done(function( data ) {  
+    console.log(data);
+ $.each(data.Listado, function(i, campo){    
+   $("#ocho").append("<form method='POST' action='<?php echo URL;?>index/inicio'><div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title text-lowercase'><div  class='text-capitalize'>"
+                    +campo.Nombre+ "</div></h3></div><div class='panel-body'>Codigo Externo :<input type='text' value='"
+                    +campo.CodigoExterno+ "' name='code'/><br /> Fecha Cierre : "
+                    +campo.FechaCierre+ "<br /> Codigo Estado :"
+                    +campo.CodigoEstado+ "<br /> <button class='btn btn-info btn-sm'>Detalle</button></div></div></form>");                                  
+        });
+      });             
+});
+$("#Publicada").click(function(){   
+    if($("#ocho").length){ $("#ocho").html(" "); }    
+    var uri = "<?php echo JSON;?>estado=Publicada&ticket=<?php echo TIC;?>";
+    $.getJSON(uri).done(function( data ) {  
+        console.log(data);
+     $.each(data.Listado, function(i, campo){    
+       $("#ocho").append("<form method='POST' action='<?php echo URL;?>index/inicio'><div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title text-lowercase'><div  class='text-capitalize'>"
+                        +campo.Nombre+ "</div></h3></div><div class='panel-body'>Codigo Externo :<input type='text' value='"
+                        +campo.CodigoExterno+ "' name='code'/><br /> Fecha Cierre : "
+                        +campo.FechaCierre+ "<br /> Codigo Estado :"
+                        +campo.CodigoEstado+ "<br /> <button class='btn btn-info btn-sm'>Detalle</button></div></div></form>");          
+                         nombre[i] = campo.Nombre;
+                        externo[i] = campo.CodigoExterno;
+                         cierre[i] = campo.FechaCierre;
+                         estado[i] = campo.CodigoEstado;            
+
+                   datos = {
+                    'nombre' : nombre[i],
+                    'externo' : externo[i],
+                    'cierre' : cierre[i],
+                    'estado' : estado[i]
+                  };
+
+
+
+            });
+          }); 
+
+        /*$.ajax({
+          type: 'GET',
+           url : 'http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json?estado=activas&ticket=7F258E67-8449-45AF-8F88-674FED6FE26A',
+          dataType: 'json',     
+          success: function(data){
+
+              $.each(data.Listado, function(i, campo){    
+              $("#ocho").append("<form method='POST' action='<?php echo URL;?>index/inicio'><div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title text-lowercase'><div  class='text-capitalize'>"
+                        +campo.Nombre+ "</div></h3></div><div class='panel-body'>Codigo Externo :<input type='text' value='"
+                        +campo.CodigoExterno+ "' name='code'/><br /> Fecha Cierre : "
+                        +campo.FechaCierre+ "<br /> Codigo Estado :"
+                        +campo.CodigoEstado+ "<br /> <button class='btn btn-info btn-sm'>Detalle</button></div></div></form>");        
+                        nombre[i] = campo.Nombre;
+                        externo[i] = campo.CodigoExterno;
+                         cierre[i] = campo.FechaCierre;
+                         estado[i] = campo.CodigoEstado;
+                console.log(typeof nombre[i]+"<br />"+
+                            typeof externo[i]+"<br />"+
+                            typeof cierre[i]+"<br />"+
+                            typeof estado[i]+"<br />"
+                           )
+
+
+
+                cont += 1;
+                   datos = {
+                    'nombre' : nombre[i],
+                    'externo' : externo[i],
+                    'cierre' : cierre[i],
+                    'estado' : estado[i]
+                  };
+                console.log(datos);
+            });
+
+
+        }
+      });
+       */       
+});
+
   
  
   
