@@ -113,10 +113,12 @@ $.getJSON(uri)
       +campo.Comprador.CodigoUsuario+ "<br /> Nombre Usuario : "
       +campo.Comprador.NombreUsuario+ "<br /> Cargo Usuario : "
       +campo.Comprador.CargoUsuario); 
-      $("#general").html("<div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title'>Licitación</h3></div><div                    class='panel-body'>Nombre de Licitacion :"
-                    +campo.Nombre+ "<br /> Codigo Externo :"
-                    +campo.CodigoExterno+ "<br /> Fecha Cierre : "
-                    +campo.FechaCierre+ "<br /> Codigo Estado :"
+     if(campo.Informada == 1){ var informada = 'Si' }else{ var informada = 'No'};
+     if(campo.CodigoTipo == 1){ var cod_tipo = 'Publica' }else{ var cod_tipo = 'Privada'};
+      $("#adicional").html("<div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title'>Detalles Adicionales</h3></div><div                    class='panel-body'>Dias cierre licitacion :"
+                    +campo.DiasCierreLicitacion+  " Dias<br /> Licitacion Informada :"
+                    +informada+ "<br /> Codigo tipo : "
+                    +cod_tipo+ "<br /> Codigo Estado :"
                     +campo.CodigoEstado+ "<br /> Descripcion :"
                     +campo.Descripcion+ "<br /> Estado :"
                     +campo.Estado); 

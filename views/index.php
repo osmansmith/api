@@ -76,6 +76,14 @@
                <button class="btn btn-success btn-lg" id="Todos">Todos</button>
            </div>
        </div>
+       <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                 <p id="est"></p><br>
+                <p id="cant"></p> 
+                </div>
+            </div>
+       </div>
       </div> 
    </div>
  </section>   
@@ -106,8 +114,9 @@
 $("#Todos").click(function(){   
     if($("#ocho").length){ $("#ocho").html(" "); }  
     var uri = "<?php echo JSON;?>estado=Todos&ticket=<?php echo TIC;?>";
-    $.getJSON(uri).done(function( data ) {  
-        console.log(data);
+    $.getJSON(uri).done(function( data ) {              
+             $("#cant").html('Cantidad : '+data.Cantidad)
+             $("#est").html('Estado : Todos');
      $.each(data.Listado, function(i, campo){    
        $("#ocho").append("<form method='POST' action='<?php echo URL;?>index/inicio'><div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title text-lowercase'><div  class='text-capitalize'>"
                         +campo.Nombre+ "</div></h3></div><div class='panel-body'>Codigo Externo :<input type='text' value='"
@@ -121,7 +130,8 @@ $("#Cerrada").click(function(){
     if($("#ocho").length){ $("#ocho").html(" "); }  
     var uri = "<?php echo JSON;?>estado=Cerrada&ticket=<?php echo TIC;?>";
     $.getJSON(uri).done(function( data ) {  
-        console.log(data);
+         $("#cant").html('Cantidad : '+data.Cantidad)
+             $("#est").html('Estado : Cerrada');
      $.each(data.Listado, function(i, campo){    
        $("#ocho").append("<form method='POST' action='<?php echo URL;?>index/inicio'><div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title text-lowercase'><div  class='text-capitalize'>"
                         +campo.Nombre+ "</div></h3></div><div class='panel-body'>Codigo Externo :<input type='text' value='"
@@ -135,7 +145,8 @@ $("#Desierta").click(function(){
 if($("#ocho").length){ $("#ocho").html(" "); }  
 var uri = "<?php echo JSON;?>estado=Desierta&ticket=<?php echo TIC;?>";
 $.getJSON(uri).done(function( data ) {  
-    console.log(data);
+            $("#cant").html('Cantidad : '+data.Cantidad)
+             $("#est").html('Estado : Desierta');
  $.each(data.Listado, function(i, campo){    
    $("#ocho").append("<form method='POST' action='<?php echo URL;?>index/inicio'><div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title text-lowercase'><div  class='text-capitalize'>"
                     +campo.Nombre+ "</div></h3></div><div class='panel-body'>Codigo Externo :<input type='text' value='"
@@ -149,7 +160,8 @@ $("#Adjudicada").click(function(){
 if($("#ocho").length){ $("#ocho").html(" "); }  
 var uri = "<?php echo JSON;?>estado=Adjudicada&ticket=<?php echo TIC;?>";
 $.getJSON(uri).done(function( data ) {  
-    console.log(data);
+             $("#cant").html('Cantidad : '+data.Cantidad)
+             $("#est").html('Estado : Adjudicada');
  $.each(data.Listado, function(i, campo){    
    $("#ocho").append("<form method='POST' action='<?php echo URL;?>index/inicio'><div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title text-lowercase'><div  class='text-capitalize'>"
                     +campo.Nombre+ "</div></h3></div><div class='panel-body'>Codigo Externo :<input type='text' value='"
@@ -163,7 +175,8 @@ $("#Revocada").click(function(){
 if($("#ocho").length){ $("#ocho").html(" "); }  
 var uri = "<?php echo JSON;?>estado=Revocada&ticket=<?php echo TIC;?>";
 $.getJSON(uri).done(function( data ) {  
-    console.log(data);
+             $("#cant").html('Cantidad : '+data.Cantidad)
+             $("#est").html('Estado : Revocada');
  $.each(data.Listado, function(i, campo){    
    $("#ocho").append("<form method='POST' action='<?php echo URL;?>index/inicio'><div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title text-lowercase'><div  class='text-capitalize'>"
                     +campo.Nombre+ "</div></h3></div><div class='panel-body'>Codigo Externo :<input type='text' value='"
@@ -177,7 +190,8 @@ $("#Suspendida").click(function(){
 if($("#ocho").length){ $("#ocho").html(" "); }  
 var uri = "<?php echo JSON;?>estado=Suspendida&ticket=<?php echo TIC;?>";
 $.getJSON(uri).done(function( data ) {  
-    console.log(data);
+             $("#cant").html('Cantidad : '+data.Cantidad)
+             $("#est").html('Estado : Suspendida');
  $.each(data.Listado, function(i, campo){    
    $("#ocho").append("<form method='POST' action='<?php echo URL;?>index/inicio'><div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title text-lowercase'><div  class='text-capitalize'>"
                     +campo.Nombre+ "</div></h3></div><div class='panel-body'>Codigo Externo :<input type='text' value='"
@@ -191,7 +205,8 @@ $("#Publicada").click(function(){
     if($("#ocho").length){ $("#ocho").html(" "); }    
     var uri = "<?php echo JSON;?>estado=Publicada&ticket=<?php echo TIC;?>";
     $.getJSON(uri).done(function( data ) {  
-        console.log(data);
+             $("#cant").html('Cantidad : '+data.Cantidad)
+             $("#est").html('Estado : Publicada');
      $.each(data.Listado, function(i, campo){    
        $("#ocho").append("<form method='POST' action='<?php echo URL;?>index/inicio'><div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title text-lowercase'><div  class='text-capitalize'>"
                         +campo.Nombre+ "</div></h3></div><div class='panel-body'>Codigo Externo :<input type='text' value='"
