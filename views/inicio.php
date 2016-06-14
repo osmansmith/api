@@ -114,14 +114,113 @@ $.getJSON(uri)
       +campo.Comprador.NombreUsuario+ "<br /> Cargo Usuario : "
       +campo.Comprador.CargoUsuario); 
      if(campo.Informada == 1){ var informada = 'Si' }else{ var informada = 'No'};
-     if(campo.CodigoTipo == 1){ var cod_tipo = 'Publica' }else{ var cod_tipo = 'Privada'};
+     if(campo.CodigoTipo == 1){ var cod_tipo = 'Pública' }else{ var cod_tipo = 'Privada'};
+     if(campo.TomaRazon == 1){ var razon = 'Si' }else{ var razon = 'No'};
+     if(campo.EstadoPublicidadOfertas == 1){ var oferta = 'Si' }else{ var oferta = 'No'};
+     var codigo_est;
+     switch(campo.Tipo) {
+    case 'L1':
+        codigo_est = 'Licitación Pública Menor a 100 UTM';
+        break;
+    case 'LE':
+        codigo_est = 'Licitación Pública Entre 100 y 1000 UTM';
+        break;
+     case 'LP':
+        codigo_est = 'Licitación Pública Mayor 1000 UTM';
+        break;
+    case 'LS':
+        codigo_est = 'Licitación Pública Servicios personales especializados ';
+        break;
+     case 'A1':
+        codigo_est = 'Licitación Privada por Licitación Pública anterior sin oferentes';
+        break;
+    case 'B1':
+        codigo_est = 'Licitación Privada por Remanente de Contrato anterior';
+        break;
+     case 'E1':
+        codigo_est = 'Licitación Privada por Convenios con Personas Jurídicas Extranjeras fuera del Territorio Nacional';
+        break;
+    case 'F1':
+        codigo_est = 'Licitación Privada por Servicios de Naturaleza Confidencial';
+        break;
+     case 'J1':
+        codigo_est = 'Licitación Privada por otras causales, excluidas de la ley de Compras';
+        break;
+    case 'CO':
+        codigo_est = 'Licitación Privada entre 100 y 1000 UTM';
+        break;
+     case 'B2':
+        codigo_est = 'Licitación Privada Mayor a 1000 UTM';
+        break;
+    case 'A2':
+        codigo_est = 'Trato Directo por Producto de Licitación Privada anterior sin oferentes o desierta';
+        break;
+     case 'D1':
+        codigo_est = 'Trato Directo por Proveedor Único';
+        break;
+    case 'E2':
+        codigo_est = 'Licitación Privada Menor a 100 UTM';
+        break;
+     case 'C2':
+        codigo_est = 'Trato Directo (Cotización)';
+        break;
+    case 'C1':
+        codigo_est = 'Compra Directa (Orden de compra)';
+        break;
+     case 'F2':
+        codigo_est = 'Trato Directo (Cotización)';
+        break;
+    case 'F3':
+        codigo_est = 'Compra Directa (Orden de compra) ';
+        break;
+     case 'G2':
+        codigo_est = 'Directo (Cotización) ';
+        break;
+    case 'G1':
+        codigo_est = 'Compra Directa (Orden de compra)';
+        break;
+     case 'R1':
+        codigo_est = 'Orden de Compra menor a 3 UTM';
+        break;
+    case 'CA':
+        codigo_est = 'Orden de Compra sin Resolución';
+        break;
+     case 'SE':
+        codigo_est = 'Orden de Compra proveniente de adquisición sin emisión automática de OC';
+        break;    
+   
+};
+     switch(campo.Moneda)
+     {
+        case 'CLP':
+        moneda = 'Peso Chileno (CLP)';
+        break;
+        case 'CLF':
+        moneda = 'Unidad de Fomento (CLF)';
+        break;
+        case 'USD':
+        moneda = 'Dólar Americano (USD)';
+        break;
+        case 'UTM':
+        moneda = 'Unidad Tributaria Mensual (UTM)';
+        break;
+        case 'EUR':
+        moneda = 'Euro (EUR)';
+        break;
+     };
       $("#adicional").html("<div class='panel panel-info'><div class='panel-heading'><h3 class='panel-title'>Detalles Adicionales</h3></div><div                    class='panel-body'>Dias cierre licitacion :"
                     +campo.DiasCierreLicitacion+  " Dias<br /> Licitacion Informada :"
                     +informada+ "<br /> Codigo tipo : "
-                    +cod_tipo+ "<br /> Codigo Estado :"
-                    +campo.CodigoEstado+ "<br /> Descripcion :"
-                    +campo.Descripcion+ "<br /> Estado :"
-                    +campo.Estado); 
+                    +cod_tipo+ "<br /> Tipo :"
+                    +codigo_est+ "<br /> Tipo Convocatoria :"
+                    +campo.TipoConvocatoria+ "<br /> Moneda :"
+                    +moneda+ "<br /> Etapas :"
+                    +campo.Etapas+ "<br /> Estado Etapas : "
+                    +campo.EstadoEtapas+ "<br /> Toma Razón : "
+                    +razon + "<br /> Oferta Publica : "
+                    +oferta+ "<br /> Justificacion de la Publicidad : "
+                    +campo.JustificacionPublicidad); 
+            
                           
         });
   
