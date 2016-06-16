@@ -25,7 +25,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
+        <li><a href="<?php echo URL;?>index/otro">Api por php</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -73,7 +73,7 @@
           <br />
        <div class="row">
            <div class="col-sm-4">
-               <button class="btn btn-success btn-lg" id="Todos">Todos</button>
+               <button class="btn btn-success btn-lg" id="Todos">Todos</button><button class="btn btn-success btn-lg" id="guardar_">Guardar</button>
            </div>
        </div>
        <div class="row">
@@ -90,13 +90,15 @@
  <section>
    <div class="container">
     
-     <div class="row">      
+     <div class="row"> 
+      <form action="<?php echo URL;?>index/guardar" method="post">  
        <div class="col-sm-12" id="ocho">
        <!-- <div class="gifLoad">
           <img src="<?php echo URL;?>public/img/loading.gif">
         </div>-->
          
-       </div>       
+       </div>
+       </form>          
      </div>
    </div>
  </section>        
@@ -182,7 +184,7 @@ $.getJSON(uri).done(function( data ) {
                     +campo.Nombre+ "</div></h3></div><div class='panel-body'>Codigo Externo :<input type='text' value='"
                     +campo.CodigoExterno+ "' name='code'/><br /> Fecha Cierre : "
                     +campo.FechaCierre+ "<br /> Codigo Estado :"
-                    +campo.CodigoEstado+ "<br /> <button class='btn btn-info btn-sm'>Detalle</button></div></div></form>");                                  
+                    +campo.CodigoEstado+ "<br /></div></div></form>");                                  
         });
       });             
 });
@@ -269,6 +271,9 @@ $("#Publicada").click(function(){
       });
        */       
 });
+    $("#guardar_").click(function(){
+        $("form").submit();
+    });
 
   
  

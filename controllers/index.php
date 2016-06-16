@@ -18,6 +18,13 @@
           $this->view->render('inicio');
    
       }
+      function otro()
+      {
+        $this->view->render('por_php');   
+      }
+      function guardar(){
+           $this->view->render('datos');
+      }
       public function licitacion()
       {    
           # Array Asociativo

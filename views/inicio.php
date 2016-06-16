@@ -1,4 +1,5 @@
 <?php
+
 if(!isset($_POST['code'])){
   header("location: ".URL."index/index");
 }else{
