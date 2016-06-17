@@ -1,6 +1,6 @@
 <?php
 $estado = "Adjudicada";
-if(isset($_POST['cambio']) && $_POST['cambio'] != " "){
+if(isset($_POST['cambio'])){    
     $estado = $_POST['cambio'];
 }
 $response = file_get_contents(JSON.'estado='.$estado.'&ticket='.TIC);
@@ -10,12 +10,11 @@ $cantidad = (string)$response->Cantidad;
 $version = (string)$response->Version;
 $fecha = (string)$response->FechaCreacion;
 $count = count($response->Listado);
-echo $count;
 /*echo gettype((object)$response->FechaCreacion);*/
 for($i=0;$i<$count;$i++){    
-    foreach ($response->Listado[$i] as $key => $value) {
+    foreach ((array)$response->Listado[$i] as $key => $value) {
 
-           echo $key." = ".$value."<br />";             
+         echo $key." : ".$value."<br />";         
     }
 }
 /*foreach ($response as $key => $value) {
@@ -99,18 +98,42 @@ for($i=0;$i<$count;$i++){
               <div class="col-sm-2"><button class="btn btn-success btn-lg " id="Adjudicada">Adjudicada</button></div>
               <div class="col-sm-2"><button class="btn btn-success btn-lg " id="Revocada">Revocada</button></div>
               <div class="col-sm-2"><button class="btn btn-success btn-lg " id="Suspendida">Suspendida</button></div>
+              
+                  <input type="text" value="Todos" name="cambio" hidden>
+              </form>
+              <form action="<?php echo URL;?>index/otro">
+                  
+              </form>
+              <form action="<?php echo URL;?>index/otro">
+                  
+              </form>
+              <form action="<?php echo URL;?>index/otro">
+                  
+              </form>
+              <form action="<?php echo URL;?>index/otro">
+                  
+              </form>
+              <form action="<?php echo URL;?>index/otro">
+                  
+              </form>
+              <form action="<?php echo URL;?>index/otro">
+                  
+              </form>
           </div>
           <br />
        <div class="row">
            <div class="col-sm-4">
-               <button class="btn btn-success btn-lg" id="Todos">Todos</button>
+              <form method="post" action="<?php echo URL;?>index/otro">
+               <input type="text" name="cambio" value="Todos" hidden>
+               <input type="submit" class="btn btn-success btn-lg"  value="Todos" />
+               </form>
            </div>
        </div>
        <div class="row">
             <div class="panel panel-default">
                 <div class="panel-body">
-                 <p id="est"></p><br>
-                <p id="cant"></p> 
+                 <p id="est">Cantidad : <?php echo $cantidad;?></p><br>
+                <p id="cant">Estado : <?php echo $estado;?></p> 
                 </div>
             </div>
        </div>
@@ -130,7 +153,7 @@ for($i=0;$i<$count;$i++){
 <script src="<?php echo URL; ?>public/js/bootstrap.min.js"></script> 
 <script>
  $("#Todos").click(function(){
-    $.post('<?php echo URL;?>index/otro/<?php echo "Todos";?>',{'cambio':"Todos"}); 
+    $("#To").submit();
  });    
 </script>
 </body>
