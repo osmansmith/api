@@ -18,7 +18,7 @@
           $this->view->render('inicio');
    
       }
-      function otro()
+      function otro($algo)
       {
         $this->view->render('por_php');   
       }
