@@ -9,22 +9,9 @@ $response = json_decode($response);
 $cantidad = (string)$response->Cantidad;
 $version = (string)$response->Version;
 $fecha = (string)$response->FechaCreacion;
+/*echo (string)$response->Listado[0]->CodigoExterno;*/
 $count = count($response->Listado);
 /*echo gettype((object)$response->FechaCreacion);*/
-for($i=0;$i<$count;$i++){    
-    foreach ((array)$response->Listado[$i] as $key => $value) {
-
-         echo $key." : ".$value."<br />";         
-    }
-}
-/*foreach ($response as $key => $value) {
-    
-    echo "Cantidad : ".$value[Cantidad]. "<br />"; 
-    foreach((array)$value[] as $key2 => $value2){
-        
-    }
-    
-}*/
 
 ?>
 <!DOCTYPE html>
@@ -132,8 +119,8 @@ for($i=0;$i<$count;$i++){
        <div class="row">
             <div class="panel panel-default">
                 <div class="panel-body">
-                 <p id="est">Cantidad : <?php echo $cantidad;?></p><br>
-                <p id="cant">Estado : <?php echo $estado;?></p> 
+                 <p class="lead">Cantidad : <?php echo $cantidad;?></p>
+                <p class="lead">Estado : <?php echo $estado;?></p> 
                 </div>
             </div>
        </div>
@@ -143,7 +130,21 @@ for($i=0;$i<$count;$i++){
  <section>
    <div class="container">    
      <div class="row">      
-       <div class="col-sm-12" id="ocho">      
+       <div class="col-sm-12" id="ocho"> 
+       <?php  
+           for($i=0;$i<$count;$i++){ 
+           
+           print ' <div class="panel panel-primary">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">'.(string)$response->Listado[$i]->Nombre.'</h3>
+                      </div>
+                      <div class="panel-body">
+                           <p class="lead"> Codigo de Licitación :'.(string)$response->Listado[$i]->CodigoExterno.'</p>
+                           <p class="lead"> Fecha de Cierre :'.(string)$response->Listado[$i]->FechaCierre.'</p>
+                      </div>
+                    </div>';
+                }  
+           ?>     
        </div>
              
      </div>
