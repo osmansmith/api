@@ -18,6 +18,6 @@
   // DB_PASS es la constante que tiene el dato de contraseña de la base de datos
   define('DB_PASS', 'root');
   // DB_NAME es la constante que tiene el dato del nombre de la base de datos
-  define('DB_NAME', 'turnos');
+  define('DB_NAME', 'licitacion');
 
 ?>

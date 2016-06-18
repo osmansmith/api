@@ -1,15 +1,20 @@
 <?php
+$mensaje=" ";
 $estado = "Adjudicada";
 if(isset($_POST['cambio'])){    
     $estado = $_POST['cambio'];
 }
-$response = file_get_contents(JSON.'estado='.$estado.'&ticket='.TIC);
+/*$fecha_api = date('d/m/Y');*/
+$fecha_api = '17/06/2016';
+/*Por Fecha es ddmmaaaa  desde 09/01/2006 */
+$fechaArray = explode('/',$fecha_api);
+$fechaFinal = $fechaArray[0].$fechaArray[1].$fechaArray[2];         
+$response = file_get_contents(JSON.'fecha='.$fechaFinal.'&estado='.$estado.'&ticket='.TIC);
 /*print $response;*/
 $response = json_decode($response);
 $cantidad = (string)$response->Cantidad;
 $version = (string)$response->Version;
 $fecha = (string)$response->FechaCreacion;
-/*echo (string)$response->Listado[0]->CodigoExterno;*/
 $count = count($response->Listado);
 /*echo gettype((object)$response->FechaCreacion);*/
 
@@ -57,17 +62,8 @@ $count = count($response->Listado);
       </ul>
      
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
+        <li><a href="#">Salir</a></li>
+       
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -79,33 +75,31 @@ $count = count($response->Listado);
         <h3>API</h3> 
           <h4>ELige la lista que quieres ver</h4>    
           <div class="row">
-              <div class="col-sm-2"><button class="btn btn-success btn-lg " id="Publicada">Publicada</button></div>
-              <div class="col-sm-2"><button class="btn btn-success btn-lg " id="Cerrada">Cerrada</button></div>
-              <div class="col-sm-2"><button class="btn btn-success btn-lg " id="Desierta">Desierta</button></div>
-              <div class="col-sm-2"><button class="btn btn-success btn-lg " id="Adjudicada">Adjudicada</button></div>
-              <div class="col-sm-2"><button class="btn btn-success btn-lg " id="Revocada">Revocada</button></div>
-              <div class="col-sm-2"><button class="btn btn-success btn-lg " id="Suspendida">Suspendida</button></div>
-              
-                  <input type="text" value="Todos" name="cambio" hidden>
+          <form action="<?php echo URL;?>index/otro" method="post">
+           <input type="text" value="Publicada" name="cambio" hidden>
+          <div class="col-sm-2"><button type="submit" class="btn btn-success btn-lg " id="Publicada">Publicada</button></div>
+          </form>
+          <form action="<?php echo URL;?>index/otro" method="post">
+           <input type="text" value="Cerrada" name="cambio" hidden>
+          <div class="col-sm-2"><button type="submit" class="btn btn-success btn-lg " id="Cerrada">Cerrada</button></div>
+           </form>
+           <form action="<?php echo URL;?>index/otro" method="post">
+           <input type="text" value="Desierta" name="cambio" hidden>
+          <div class="col-sm-2"><button type="submit" class="btn btn-success btn-lg " id="Desierta">Desierta</button></div>
+           </form>
+            <form action="<?php echo URL;?>index/otro" method="post">
+           <input type="text" value="Adjudicada" name="cambio" hidden>
+          <div class="col-sm-2"><button type="submit" class="btn btn-success btn-lg " id="Adjudicada">Adjudicada</button></div>
+            </form>
+           <form action="<?php echo URL;?>index/otro" method="post">
+           <input type="text" value="Revocada" name="cambio" hidden>
+          <div class="col-sm-2"><button type="submit" class="btn btn-success btn-lg " id="Revocada">Revocada</button></div>
+           </form>
+           <form action="<?php echo URL;?>index/otro" method="post">
+           <input type="text" value="Suspendida" name="cambio" hidden>
+          <div class="col-sm-2"><button type="submit" class="btn btn-success btn-lg " id="Suspendida">Suspendida</button></div>
               </form>
-              <form action="<?php echo URL;?>index/otro">
-                  
-              </form>
-              <form action="<?php echo URL;?>index/otro">
-                  
-              </form>
-              <form action="<?php echo URL;?>index/otro">
-                  
-              </form>
-              <form action="<?php echo URL;?>index/otro">
-                  
-              </form>
-              <form action="<?php echo URL;?>index/otro">
-                  
-              </form>
-              <form action="<?php echo URL;?>index/otro">
-                  
-              </form>
+                                
           </div>
           <br />
        <div class="row">
@@ -119,10 +113,17 @@ $count = count($response->Listado);
        <div class="row">
             <div class="panel panel-default">
                 <div class="panel-body">
-                 <p class="lead">Cantidad : <?php echo $cantidad;?></p>
-                <p class="lead">Estado : <?php echo $estado;?></p> 
+                 <p class="lead"><b>Cantidad :</b><em><?php echo $cantidad;?></em> </p>
+                <p class="lead"><b>Estado : </b><em><?php echo $estado;?></em></p> 
+                <p class="lead"><b>Fecha : </b><em><?php echo $fecha_api;?></em></p> 
+                
                 </div>
             </div>
+       </div>
+       <div class="row">
+           <div class="col-sm-10">
+               <?php echo $mensaje;?>
+           </div>
        </div>
       </div> 
    </div>
@@ -132,18 +133,34 @@ $count = count($response->Listado);
      <div class="row">      
        <div class="col-sm-12" id="ocho"> 
        <?php  
+          $co = new Conexion(DB_HOST,DB_NAME,DB_USER,DB_PASS);
            for($i=0;$i<$count;$i++){ 
-           
+           $nom = (string)$response->Listado[$i]->Nombre;
+           $cod = (string)$response->Listado[$i]->CodigoExterno;
+           $fec = (string)$response->Listado[$i]->FechaCierre;
            print ' <div class="panel panel-primary">
                       <div class="panel-heading">
-                        <h3 class="panel-title">'.(string)$response->Listado[$i]->Nombre.'</h3>
+                        <h3 class="panel-title">'.$nom.'</h3>
                       </div>
                       <div class="panel-body">
-                           <p class="lead"> Codigo de Licitación :'.(string)$response->Listado[$i]->CodigoExterno.'</p>
-                           <p class="lead"> Fecha de Cierre :'.(string)$response->Listado[$i]->FechaCierre.'</p>
+                           <p class="lead"> Codigo de Licitación :'.$cod.'</p>
+                           <p class="lead"> Fecha de Cierre :'.$fec.'</p>
                       </div>
                     </div>';
-                }  
+                 $result = $co->ejecutar("SELECT codigo_base FROM base WHERE codigo_base ='".$cod."'");
+               if($result)
+               {
+                  /* si se encuentra codigo significa que esta guardado*/
+               }else{
+                $co->ejecutar("INSERT INTO base(codigo_base,nombre_base,fecha_base)VALUES('".$cod."','".$nom."','".$fec."')");
+                 $mensaje = '<div class="alert alert-success" role="alert">Datos guardados <em>Exitosamente!</em></div>';
+               }
+               
+                }
+           
+              
+             
+          
            ?>     
        </div>
              
@@ -152,10 +169,5 @@ $count = count($response->Listado);
  </section>        
 <script src="<?php echo URL; ?>public/js/jquery.js"></script>  
 <script src="<?php echo URL; ?>public/js/bootstrap.min.js"></script> 
-<script>
- $("#Todos").click(function(){
-    $("#To").submit();
- });    
-</script>
 </body>
 </html>
