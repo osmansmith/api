@@ -18,7 +18,7 @@ $count = count($response->Listado);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Inicio</title>    
+    <title>Api con php</title>    
     <link rel="stylesheet" href="<?php echo URL; ?>public/css/bootstrap.min.css">      
     <link rel="stylesheet" href="<?php echo URL; ?>public/css/style.css">
 </head>
