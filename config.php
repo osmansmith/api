@@ -5,9 +5,9 @@
  
   // URL es la constante que tiene la direccion raiz del proyecto
   define('URL','http://localhost/api/');
-
+    // TIC es la constante que tiene la key necesaria para llamar datos a la api
   define('TIC','7F258E67-8449-45AF-8F88-674FED6FE26A');
-
+   // JSON es la constante que se usa para llamar datos de licitaciones a mercado publico
   define('JSON','http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json?');
   // LIBS es la constante que tiene la direccion de la libreria de clases
   define('LIBS','libs/');
